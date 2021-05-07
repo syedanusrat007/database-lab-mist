@@ -1,0 +1,35 @@
+CREATE TABLE OldPEOPLE
+(
+O_id VARCHAR2(12),
+O_name VARCHAR2(20),
+O_dob DATE,
+
+O_rel_add VARCHAR2(80),
+O_rel_phn VARCHAR2(20),
+O_blood_grp VARCHAR2(12),
+O_joining_date DATE,
+O_education VARCHAR2(40),
+O_hobby VARCHAR2(50),
+O_medicine_list VARCHAR2(60),
+O_diease VARCHAR2(40),
+O_religion VARCHAR2(12),
+O_food_restriction VARCHAR2(60),
+O_status VARCHAR2(12),
+O_date_of_dead VARCHAR2(40),
+O_reason_of_dead VARCHAR2(40),
+O_burried_place VARCHAR2(50),
+Age number as (trunc((months_between(to_date('26-apr-2017','dd-mon-yyyy'),O_dob)/12),0)) ,
+
+CONSTRAINT OldPEOPLE_O_id_pk PRIMARY KEY(O_id)
+);
+
+
+CREATE TRIGGER DeathOldPEOPLE
+BEFORE UPDATE OF O_status
+ON OldPEOPLE
+FOR EACH ROW
+WHEN (new.O_status = 'dead')
+BEGIN
+dbms_output.put_line('trigger called of dead people');
+INSERT INTO DeathOldPEOPLE VALUES (:old.O_id, :old.O_name, :old.O_dob, :old.O_rel_add, :old.O_rel_phn, :old.O_blood_grp, :old.O_joining_date, :old.O_status, :old.O_date_of_dead, :old.O_reason_of_dead, :old.O_burried_place);
+END;

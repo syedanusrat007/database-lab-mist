@@ -1,0 +1,25 @@
+
+create or replace view total_cost("amount") 
+as
+select sum(acc_amount) from account where TRANSACTION_TYPE='Withdrawal';
+
+
+create or replace view donar_income("date","amount") 
+as
+select d_date,sum(d_ammount) from donar group by d_date;
+
+
+create or replace view gv_income("date","amount") 
+as
+select gv_date,sum(income) from gov_fund group by gv_date;
+
+
+create or replace view total_income("amount") 
+as
+select sum(acc_amount) from account where TRANSACTION_TYPE='Deposit'; 
+
+
+create or replace view gb_income("date","amount") 
+as
+select gb_date,sum(income) from GOVERNING_BODY group by gb_date;
+

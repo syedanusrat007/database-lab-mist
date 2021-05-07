@@ -1,0 +1,3 @@
+select M.NAME "MANAGER NAME", E.SALARY "AVERAGE SALARY" from employee E, EMPLOYEE M 
+where E.SALARY in (select   max(ROUND(avg(E.SALARY), 2))  from employee E, EMPLOYEE M WHERE E.m_id = M.EMP_ID GROUP BY M.NAME)
+and  E.m_id = M.EMP_ID

@@ -1,0 +1,64 @@
+
+create or replace view treatment_view2("Name","Doctor_Name","Fee","Visited_Date","phone_Number")  as 
+select O_name,doc_name,T_fee,T_date,doc_mobile from oldpeople join treats using(O_id) join Doctor using(Doc_id)  join  DOCONTACT using(Doc_id);
+
+select *from treatment_view1;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+UPDATE  oldpeople set O_medicine_list ='Remeron,Paracitamol'  where O_name ='Syeda Banu' ;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+create or replace view oldrelation_view1("Name","Relative name","Relation","Amount") as
+select  O.O_name,M.OR_name, M.O_relation, M.Ammount from  OldPeopleRelative M 
+join relates R on M.OR_id= R.OR_id
+ join oldpeople O on O.O_id = R.O_id;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+create or replace view Emp_view("Employee ID","Manager ID","Name","Nid","Dob","Pna","pa","em","bg","edu","exp","join","le","sa","type") as  select *from employee where SALARY   >all
+(select ROUND(avg(SALARY), 2)  from employee where m_id !='NULL' group by M_id HAVING avg(SALARY) > 1000) ;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+create or replace view food_view("Date","Cost Of Food") as
+select to_char(F_date,'dd-mon-yyyy'), sum(income) from food group by f_date order by F_date; 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+create or replace view eve_view("place","Event_date","cost") as
+select place ,event_date,income from events
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+create or replace view man_view("MAINTAINANCE type","Cost","Date") as
+select type,income,m_date from MAINTAINANCE;
+
+select * from man_view;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+create or replace view 
+medi_view( "Name","date","cost") as
+
+select med_name,income,med_date from  medicine;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+create view ee_view("NAME","PRESENT_ADDRESS", "BLOOD_GROUP","JOINING_DATE", "TYPE") as
+select NAME,PRESENT_ADDRESS, BLOOD_GROUP,JOINING_DATE, TYPE from employee;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+create or replace view height_sal_view3("MANAGER NAME", "AVERAGE SALARY" ) as select M.NAME, E.SALARY from employee E, EMPLOYEE M 
+where E.SALARY in (select   ROUND(avg(E.SALARY), 2)  from employee E, EMPLOYEE M WHERE E.m_id = M.EMP_ID GROUP BY M.NAME)
+and  E.m_id = M.EMP_ID;
+
+select *from height_sal_view3;
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+

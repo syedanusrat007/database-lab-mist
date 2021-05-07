@@ -1,0 +1,174 @@
+1.CREATE TABLE OldPEOPLE
+(
+O_id VARCHAR2(12),
+O_name VARCHAR2(20),
+O_dob DATE,
+O_age NUMERIC,
+O_rel_add VARCHAR2(80),
+O_rel_phn VARCHAR2(20),
+O_blood_grp VARCHAR2(12),
+O_joining_date DATE,
+O_education VARCHAR2(40),
+O_hobby VARCHAR2(50),
+O_medicine_list VARCHAR2(60),
+O_diease VARCHAR2(40),
+O_religion VARCHAR2(12),
+O_food_restriction VARCHAR2(60),
+O_status VARCHAR2(12),
+O_date_of_dead VARCHAR2(40),
+O_reason_of_dead VARCHAR2(40),
+O_burried_place VARCHAR2(50),
+CONSTRAINT OldPEOPLE_O_id_pk PRIMARY KEY(O_id)
+);
+
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_education,O_hobby,O_medicine_list,O_diease,O_religion,O_food_restriction,O_status) 
+VALUES ( 'O_1','Syeda Banu', to_date('12-Jan-1931', 'DD-MON-YYYY'),'House No. 19. Road No. 6, Baridhara 1212. Dhaka','02-9842437','A-',to_date('10-Jun-2006', 'DD-MON-YYYY'),'SSC passed','reciting quran','Synthroid,Napa,Aricept','High pressure','Islam','high salt foods,egg,meat,hilsha fish','Alive');
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_education,O_hobby,O_medicine_list,O_diease,O_religion,O_food_restriction,O_status) 
+VALUES ( 'O_2','Hafija', to_date('19-Jun-1937', 'DD-MON-YYYY'),'1419 Westwood Blvd in Los Angeles, California','+916-654-5266','A+',to_date('15-Jul-2006', 'DD-MON-YYYY'),'8th grade passed','Reading','Remeron,Paracitamol','muscle weakness','Islam','high spicy foods','Alive');
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_education,O_hobby,O_medicine_list,O_diease,O_religion,O_food_restriction,O_status) 
+VALUES ( 'O_3','Ambia Khanom', to_date('01-Mar-1930', 'DD-MON-YYYY'),'House # 13, Road # 08,Baridhara Diplomatic Zone, Dhaka','02-58654773','A-',to_date('1-Mar-2009', 'DD-MON-YYYY'),'5th grade passed','Sewing','Paracitamol,Ativan,Zoloft','Bronchial','Islam','Peanuts, Eggs, Soy, Wheat','Alive');
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_diease,O_religion,O_status,O_date_of_dead,O_reason_of_dead,O_burried_place) 
+VALUES ( 'O_4','Julekha', to_date('12-Feb-1921', 'DD-MON-YYYY'),'73/B Kemal Ataturk Avenue, Banani, Dhaka-1213','02-75476868','B+',to_date('10-Jun-2006', 'DD-MON-YYYY'),'Diabetes','Islam','Dead',to_date('4-Dec-2016', 'DD-MON-YYYY'),'Cancer','Banani graveyard');
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_education,O_hobby,O_medicine_list,O_diease,O_religion,O_food_restriction,O_status) 
+VALUES ( 'O_5','Rana Khan', to_date('04-Jan-1930', 'DD-MON-YYYY'),'House No. 19. Road No. 6, Baridhara 1212. Dhaka','0183254354','O+',to_date('01-Dec-2007', 'DD-MON-YYYY'),'8th grade passed','reciting quran','Lisinopril, Aricept,Napa','Diabetes','Islam','Sweets','Alive');
+
+
+SELECT * FROM OldPEOPLE;
+
+2.CREATE TABLE TREATS
+(
+O_id VARCHAR2(12),
+doc_id VARCHAR2(12),
+T_date DATE,
+T_fee NUMERIC,
+CONSTRAINT TREATS_O_id_FK FOREIGN KEY(O_id) REFERENCES OldPEOPLE(O_id),
+CONSTRAINT TREATS_doc_id_FK FOREIGN KEY(doc_id) REFERENCES DOCTOR(doc_id)
+);
+
+
+INSERT INTO TREATS (O_id,doc_id,T_date,T_fee) 
+VALUES ( 'O_1', 'doc_1', to_date('02-Jan-2017', 'DD-MON-YYYY'), 500);
+INSERT INTO TREATS (O_id,doc_id,T_date,T_fee) 
+VALUES ( 'O_2', 'doc_4', to_date('02-Jan-2017', 'DD-MON-YYYY'), 600);
+INSERT INTO TREATS (O_id,doc_id,T_date,T_fee) 
+VALUES ( 'O_3', 'doc_3', to_date('02-Jan-2017', 'DD-MON-YYYY'), 400);
+INSERT INTO TREATS (O_id,doc_id,T_date,T_fee) 
+VALUES ( 'O_4', 'doc_5', to_date('30-Nov-2016', 'DD-MON-YYYY'), 500);
+INSERT INTO TREATS (O_id,doc_id,T_date,T_fee) 
+VALUES ( 'O_5', 'doc_2', to_date('02-Jan-2017', 'DD-MON-YYYY'), 500);
+INSERT INTO TREATS (O_id,doc_id,T_date,T_fee) 
+
+
+SELECT * FROM TREATS;
+
+3.CREATE TABLE RELATES
+(
+OR_id VARCHAR2(10),
+O_id VARCHAR2(10),
+CONSTRAINT FK_OldPeopleRelative FOREIGN KEY (OR_id) REFERENCES OldPeopleRelative(OR_id),
+CONSTRAINT FK_OldPEOPLE FOREIGN KEY (O_id) REFERENCES OldPEOPLE(O_id));
+
+INSERT INTO RELATES (OR_id,O_id) 
+VALUES ( 'OR_1', 'O_1');
+INSERT INTO RELATES (OR_id,O_id) 
+VALUES ( 'OR_2', 'O_2');
+INSERT INTO RELATES (OR_id,O_id) 
+VALUES ( 'OR_3', 'O_3');
+INSERT INTO RELATES (OR_id,O_id) 
+VALUES ( 'OR_4', 'O_4');
+INSERT INTO RELATES (OR_id,O_id) 
+VALUES ( 'OR_5', 'O_5');
+
+
+
+SELECT * FROM RELATES;
+
+4.CREATE TABLE OldPeopleRelative
+(
+OR_id VARCHAR2(10),
+OR_NID VARCHAR2(30),
+OR_name VARCHAR2(20),
+O_rel_add VARCHAR2(80),
+O_rel_phn VARCHAR2(20),
+OR_blood_grp VARCHAR2(20),
+O_relation VARCHAR2(20),
+Ammount NUMERIC,
+CONSTRAINT OldPeopleRelative_OR_id_pk PRIMARY KEY(OR_id)
+);
+
+INSERT INTO OldPeopleRelative (OR_id,OR_NID,OR_name,O_rel_add,O_rel_phn,OR_blood_grp,O_relation,Ammount) 
+VALUES ( 'OR_1','24038240858023', 'Rohim','House No. 19. Road No. 6, Baridhara 1212. Dhaka','02-9842437','A+','Mother', 5000);
+INSERT INTO OldPeopleRelative (OR_id,OR_NID,OR_name,O_rel_add,O_rel_phn,OR_blood_grp,O_relation,Ammount) 
+VALUES ( 'OR_2','24038243254025' ,'Korim','1419 Westwood Blvd in Los Angeles, California','+916-654-5266','O+','Sister', 20000);
+INSERT INTO OldPeopleRelative (OR_id,OR_NID,OR_name,O_rel_add,O_rel_phn,OR_blood_grp,O_relation,Ammount) 
+VALUES ( 'OR_3','24322340858022', 'Rahima','House # 13, Road # 08, Baridhara Diplomatic Zone, Dhaka','02-58654773','A-','Mother', 5000);
+INSERT INTO OldPeopleRelative (OR_id,OR_NID,OR_name,O_rel_add,O_rel_phn,OR_blood_grp,O_relation) 
+VALUES ( 'OR_4','24038324238027' ,'Korima','73/B Kemal Ataturk Avenue, Banani, Dhaka-1213','02-75476868','B+','Sister');
+INSERT INTO OldPeopleRelative (OR_id,OR_NID,OR_name,O_rel_add,O_rel_phn,OR_blood_grp,O_relation,Ammount) 
+VALUES ( 'OR_5','24038240435499', 'Topu','House No. 19. Road No. 6, Baridhara 1212. Dhaka','0183254354','O-','Father', 8000);
+
+ 
+SELECT * FROM OldPeopleRelative;
+
+5.CREATE TABLE TAKES_CARE
+(
+E_id VARCHAR2(10),
+O_id VARCHAR2(10),
+CONSTRAINT RELATES_E_id_FK FOREIGN KEY(E_id) REFERENCES EMPLOYEE(E_id),
+CONSTRAINT RELATES_O_id_FK FOREIGN KEY(O_id) REFERENCES OldPEOPLE(O_id)
+);
+
+INSERT INTO TAKES_CARE (E_id,O_id) 
+VALUES ( 'E_1', 'O_1');
+INSERT INTO TAKES_CARE (E_id,O_id) 
+VALUES ( 'E_2', 'O_2');
+INSERT INTO TAKES_CARE (E_id,O_id) 
+VALUES ( 'E_3', 'O_3');
+INSERT INTO TAKES_CARE (E_id,O_id) 
+VALUES ( 'E_4', 'O_4');
+INSERT INTO TAKES_CARE (E_id,O_id) 
+VALUES ( 'E_5', 'O_5');
+
+
+SELECT * FROM TAKES_CARE;
+
+TONNI:
+Create table  TAKES
+(
+O_id VARCHAR2(10) ,
+O_quantity NUMBER,
+med_name  VARCHAR2(20),
+CONSTRAINT OldPEOPLE_O_id_FK FOREIGN KEY(O_id) REFERENCES OldPEOPLE(O_id),
+CONSTRAINT MEDICINE_med_name_FK FOREIGN KEY(med_name) REFERENCES MEDICINE(med_name)
+);
+
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_1',7,'Synthroid');
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_1',5,'Napa');
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_1',3,'Aricept');
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_2',3,'Remeron');
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_2',5,'Paracitamol');
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_3',3,'Paracitamol');---
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_3',2,'Ativan');---
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_3',12,'Zoloft');---
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_5',10,'Lisinopril');---
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_5',3,'Aricept');
+INSERT INTO TAKES (O_id,O_quantity,med_name) VALUES ('O_5',7,'NAPA');---
+
+select *from  TAKES;
+
+Create table medicine
+(
+med_name VARCHAR2(20),
+med_quantity NUMBER ,
+med_cost NUMBER ,
+med_date DATE,
+CONSTRAINT medicine_med_name_pk PRIMARY KEY(med_name)
+);
+
+INSERT INTO medicine (med_name,med_quantity ,med_cost,med_date) VALUES ('Synthroid',7,21,to_date('1/2/2017','dd/mm/yyyy'));
+INSERT INTO medicine (med_name,med_quantity ,med_cost,med_date) VALUES ('Napa',12,24,to_date('1/2/2017','dd/mm/yyyy'));
+INSERT INTO medicine (med_name,med_quantity ,med_cost,med_date) VALUES ('Aricept',6,30,to_date('1/2/2017','dd/mm/yyyy'));
+INSERT INTO medicine (med_name,med_quantity ,med_cost,med_date) VALUES ('Remeron',3,15,to_date('1/2/2017','dd/mm/yyyy'));
+INSERT INTO medicine (med_name,med_quantity ,med_cost,med_date) VALUES ('Paracitamol',5,10,to_date('1/2/2017','dd/mm/yyyy'));
+
+select *from  medicine;

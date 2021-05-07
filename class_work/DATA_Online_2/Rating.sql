@@ -1,0 +1,11 @@
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(500, 0, '0.0');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(1000, 501, '0.5');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(2000, 1001, '1.0');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(3000, 2001, '1.5');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(4000, 3001, '2.0');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(5000, 4001, '2.5');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(6000, 5001, '3.0');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(7000, 6001, '3.5');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(8000, 7001, '4.0');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(9000, 8001, '4.5');
+Insert into RATING (Vote_Upper_Bound, Vote_Lower_Bound, Rate) values(10000, 9001, '5.0');

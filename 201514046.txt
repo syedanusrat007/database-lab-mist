@@ -1,0 +1,93 @@
+   1. CREATE TABLE CUSTOMER
+(
+Cust_id VARCHAR2(12) Not NULL,
+Cust_name VARCHAR2(20),
+Cust_dob DATE,
+Cust_city VARCHAR2(12)
+);
+
+INSERT INTO  CUSTOMER (Cust_id,Cust_name,Cust_dob,Cust_city) 
+VALUES ( 'C_1', 'Customer_1',to_date('12-Jan-1993','DD-Mon-YYYY'),'Dhaka');
+
+INSERT INTO  CUSTOMER (Cust_id,Cust_name,Cust_dob,Cust_city) 
+VALUES ( 'C_2', 'Customer_2',to_date('02-Jan-1983','DD-Mon-YYYY'),'Khulna');
+
+INSERT INTO  CUSTOMER (Cust_id,Cust_name,Cust_dob,Cust_city) 
+VALUES ( 'C_3', 'Customer_3',to_date('23-Jul-1973','DD-Mon-YYYY'),'Comilla');
+
+INSERT INTO  CUSTOMER (Cust_id, Cust_name,Cust_dob,Cust_city) 
+VALUES ( 'C_4', 'Customer_4',to_date('03-Dec-1976','DD-Mon-YYYY'),'Rajshahi');
+
+CREATE TABLE ACCOUNT
+(
+Account_id VARCHAR2(12) Not NULL,
+Balance VARCHAR2(20),
+Account_type VARCHAR2(20)
+);
+
+INSERT INTO ACCOUNT (Account_id,Balance,Account_type) 
+VALUES ( 'A_1', '5000','Current');
+
+INSERT INTO ACCOUNT (Account_id,Balance,Account_type) 
+VALUES ( 'A_2', '6000','Saving');
+
+  INSERT INTO ACCOUNT (Account_id,Balance,Account_type) 
+VALUES ( 'A_3', '7000','Current');
+
+INSERT INTO ACCOUNT (Account_id,Balance,Account_type) 
+VALUES ( 'A_4', '6000','Current');
+
+INSERT INTO ACCOUNT (Account_id,Balance,Account_type) 
+VALUES ( 'A_5', '4000','Saving');
+
+CREATE TABLE DEPOSITOR
+(
+Cust_id VARCHAR2(12) Not NULL,
+Account_id VARCHAR2(12) Not NULL
+);
+
+INSERT INTO DEPOSITOR (Cust_id,Account_id) 
+VALUES ( 'C_2', 'A_1');
+
+INSERT INTO DEPOSITOR (Cust_id,Account_id) 
+VALUES ( 'C_1', 'A_3');
+
+INSERT INTO DEPOSITOR (Cust_id,Account_id) 
+VALUES ( 'C_2', 'A_2');
+
+INSERT INTO DEPOSITOR (Cust_id,Account_id) 
+VALUES ( 'C_4', 'A_4');
+
+
+
+   2.  SELECT Cust_name,Account_id FROM CUSTOMER ,DEPOSITOR2
+
+WHERE CUSTOMER.Cust_id = DEPOSITOR.Cust_id;
+
+
+
+
+   3.SELECT Cust_dob, Account_id FROM CUSTOMER NATURAL JOIN ACCOUNT NATURAL JOIN DEPOSITOR;
+
+
+
+   4.  
+       SELECT Cust_name, Account_type FROM CUSTOMER ,ACCOUNT 
+
+     JOIN DEPOSITOR ON ACCOUNT.Account_id = DEPOSITOR.Account_id ;
+
+
+  5.
+     SELECT Cust_city, Account_id FROM CUSTOMER 
+
+     JOIN DEPOSITOR USING(Cust_id);
+ 
+
+
+
+
+
+
+
+
+

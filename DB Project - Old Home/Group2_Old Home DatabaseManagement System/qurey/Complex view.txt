@@ -1,0 +1,106 @@
+
+
+.................................FINAL TRIGGER..............
+
+create or replace view Complex_view_trig1 ("EMPID", "NAME","EVENTID","EVENTDATE", "PLACE", "COST", "NOPEOPLE", "SPONSORDEDBY")
+as
+select EMPID, NAME, EVENTID, EVENTDATE, PLACE, COST, NOPEOPLE, SPONSORDED 
+from employee1 join organizes1 using(EMPID) join events1 using(EVENTID)
+where NOPEOPLE >= 35;
+
+
+create or replace trigger insert_complex_view_trig1
+instead of insert
+on Complex_view_trig1
+for each row
+begin
+insert into employee1(EMPID, NAME) values(:new.EMPID, :new.NAME);
+insert into events1(EVENTID, EVENTDATE, PLACE, COST) values(:new.EVENTID, :new.EVENTDATE, :new.PLACE, :new.COST);
+end;
+
+
+insert into Complex_view_trig1("EMPID", "NAME","EVENTID","EVENTDATE", "PLACE", "COST") 
+values('E_10', 'Moina', 'Eve_06', to_date('05-05-2017', 'DD-MM-YYYY'), 'Dhaka', 4500);
+
+insert into Complex_view_trig1("EMPID", "NAME","EVENTID","EVENTDATE", "PLACE", "COST") 
+values('E_9', 'Monisha', 'Eve_07', to_date('06-05-2017', 'DD-MM-YYYY'), 'Comilla', 4000);
+
+select *from employee;
+select *from events;
+
+select *from Complex_view_trig;
+
+
+
+
+
+
+
+..................USER VIEW............................
+
+//////////////////////////////
+
+create or replace view old_view ("Name of Old People","Age","Date of birth","Blood Group", "Hobby", "Food Restruction", "Religion", "Disease", "Medicine List", "Status")
+as
+select O_name,Age, O_dob ,O_blood_grp, O_hobby, O_food_restriction,O_religion ,O_diease ,O_medicine_list ,O_status 
+from oldpeople;
+
+select *from old_view;
+
+//////////////////////////////////
+
+create or replace view events_view ("EVENT ID", "EVENT DATE", "PLACE", "TYPE", "NO OF PEOPLE", "SPONSORDED BY")
+as
+select EVENT_ID, EVENT_DATE, PLACE, TYPE, NO_OF_PEOPLE, SPONSORDED_BY 
+from events;
+
+select *from events_view;
+
+
+///////////////////////////////////
+
+create or replace view emp_view ("Name of Employee","Age","Date of birth","Blood Group", "Category of Employee", "Education", "Years of Service", "Phone Number")
+as
+select NAME ,Age, DOB ,BLOOD_GROUP, TYPE ,EDUCATION, trunc((months_between(TO_CHAR(SYSDATE, 'dd-mm-yyyy'),JOINING_DATE)/12),0, PHONE_NO)
+from employee join EMP_PHONE using(EMP_ID);
+
+select *from emp_view;
+
+
+////////////////////////////////////
+
+
+create or replace view doc_view ("Name of Doctor","Date of birth","Blood Group", "Speciality", "Doctor Phone Number","Hospital Name", "Hospital Address", "Hospital Phone Number")
+as
+select doc_name ,doc_dob ,doc_blood_grp, specialist, doc_mobile,hospital_name, hospital_address, hospital_emergencynum
+from doctor join  DOCONTACT using(Doc_id);
+
+select *from doc_view;
+
+
+///////////////////////////////////////
+
+create or replace view food_view ("Serial Id","Day of the Week","Food Type", "Food Menu", "Date", "Time")
+as
+select serial_id, f_day, food_type ,food_menu, f_date ,period
+from food;
+
+select *from food_view;
+
+
+
+..........................Transaction.....................
+
+BEGIN
+SAVEPOINT dup_found;
+UPDATE employee SET emp_id='E_9'
+WHERE  name = 'Khokon Mia';
+EXCEPTION
+WHEN DUP_VAL_ON_INDEX THEN
+ROLLBACK TO dup_found;
+END;
+
+
+
+
+

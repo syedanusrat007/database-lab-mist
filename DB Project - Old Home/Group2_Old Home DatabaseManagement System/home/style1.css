@@ -1,0 +1,121 @@
+body {
+    background-image: url(ppp.jpg);
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: crimson;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: crimson;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.styled_input{
+    background: white;
+    padding:5px;
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.styled_div{
+    text-align: center;
+    width: 80%;
+    margin:0 auto;
+    background-color: grey;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px; 
+    border-radius: 7px;
+    padding:15px;
+}
+
+.login {
+
+  width: 250px;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  margin: -184px 0px 0px -155px;
+  background: rgba(0,0,0,0.5);
+  padding: 20px 30px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 0px rgba(0,0,0,0.3),inset 0px 1px 0px rgba(255,255,255,0.07)
+}
+
+.styled_div2{
+    text-align: center;
+    width: 40%;
+    margin:0 auto;
+    background-color: grey;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px; 
+    border-radius: 7px;
+    padding:15px;
+}
+
+
+input{
+ width:250px;
+ height:30px;
+}
+input[type="submit"]{
+   background: #3399ff;
+  border: 0;
+  width: 250px;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.4s linear;
+}

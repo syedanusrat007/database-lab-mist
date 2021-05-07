@@ -1,0 +1,98 @@
+CREATE TABLE OldPEOPLE
+(
+O_id VARCHAR2(12),
+O_name VARCHAR2(20),
+O_dob DATE,                                                                                                                 
+O_rel_add VARCHAR2(80),
+O_rel_phn VARCHAR2(20),
+O_blood_grp VARCHAR2(12),
+O_joining_date DATE,
+O_status VARCHAR2(12),
+O_education VARCHAR2(40),
+O_religion VARCHAR2(12),
+O_hobby VARCHAR2(50),
+O_medicine_list VARCHAR2(60),
+O_diease VARCHAR2(40),
+O_food_restriction VARCHAR2(60),
+O_date_of_dead VARCHAR2(40),
+O_reason_of_dead VARCHAR2(40),
+O_burried_place VARCHAR2(50),
+Age number as (trunc((months_between(to_date('26-apr-2017','dd-mon-yyyy'),O_dob)/12),0)) ,
+CONSTRAINT OldPEOPLE_O_id_pk PRIMARY KEY(O_id)
+);
+
+
+
+
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_education,O_hobby,O_medicine_list,O_diease,O_religion,O_food_restriction,O_status) 
+VALUES ( 'O_1','Syeda Banu', to_date('12-Jan-1931', 'DD-MON-YYYY'),'House No. 19. Road No. 6, Baridhara 1212. Dhaka','02-9842437','A-',to_date('10-Jun-2006', 'DD-MON-YYYY'),'SSC passed','reciting quran','Synthroid,Napa,Aricept','High pressure','Islam','high salt foods,egg,meat,hilsha fish','Alive');
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_education,O_hobby,O_medicine_list,O_diease,O_religion,O_food_restriction,O_status) 
+VALUES ( 'O_2','Hafija', to_date('19-Jun-1937', 'DD-MON-YYYY'),'1419 Westwood Blvd in Los Angeles, California','+916-654-5266','A+',to_date('15-Jul-2006', 'DD-MON-YYYY'),'8th grade passed','Reading','Remeron,Paracitamol','muscle weakness','Islam','high spicy foods','Alive');
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_education,O_hobby,O_medicine_list,O_diease,O_religion,O_food_restriction,O_status) 
+VALUES ( 'O_3','Ambia Khanom', to_date('01-Mar-1930', 'DD-MON-YYYY'),'House # 13, Road # 08,Baridhara Diplomatic Zone, Dhaka','02-58654773','A-',to_date('1-Mar-2009', 'DD-MON-YYYY'),'5th grade passed','Sewing','Paracitamol,Ativan,Zoloft','Bronchial','Islam','Peanuts, Eggs, Soy, Wheat','Alive');
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_education,O_hobby,O_medicine_list,O_diease,O_religion,O_food_restriction,O_status) 
+VALUES ( 'O_4','Rana Khan', to_date('04-Jan-1930', 'DD-MON-YYYY'),'House No. 19. Road No. 6, Baridhara 1212. Dhaka','0183254354','O+',to_date('01-Dec-2007', 'DD-MON-YYYY'),'8th grade passed','reciting quran','Lisinopril, Aricept,Napa','Diabetes','Islam','Sweets','Alive');
+INSERT INTO OldPEOPLE (O_id,O_name,O_dob,O_rel_add,O_rel_phn,O_blood_grp,O_joining_date,O_education,O_hobby,O_medicine_list,O_diease,O_religion,O_food_restriction,O_status) 
+VALUES ( 'O_5','Julekha', to_date('12-Feb-1921', 'DD-MON-YYYY'),'73/B Kemal Ataturk Avenue, Banani, Dhaka-1213','02-75476868','B+',to_date('10-Jun-2006', 'DD-MON-YYYY'),'8th grade passed','reciting quran','Lisinopril, Aricept,Napa','Diabetes','Islam','Sweets','Alive');
+
+
+
+
+
+
+.....................................deathold............
+
+
+CREATE TABLE DeathOldPEOPLE
+(
+O_id VARCHAR2(12),
+O_name VARCHAR2(20),
+O_dob DATE,
+O_rel_add VARCHAR2(80),
+O_rel_phn VARCHAR2(20),
+O_blood_grp VARCHAR2(12),
+O_joining_date DATE,
+O_status VARCHAR2(12),
+O_date_of_dead VARCHAR2(40),
+O_reason_of_dead VARCHAR2(40),
+O_burried_place VARCHAR2(50),
+CONSTRAINT DeathOldPEOPLE_O_id_pk PRIMARY KEY(O_id)
+);
+
+
+.....................................................update deatholdpeople..............................
+
+update deatholdpeople set O_reason_of_dead='accident'
+where O_id='O_1';
+
+
+
+.......................................trigger...........
+CREATE or replace  TRIGGER Death6
+after UPDATE OF O_status,O_date_of_dead,O_reason_of_dead,O_burried_place
+ON OldPEOPLE
+FOR EACH ROW
+BEGIN
+dbms_output.put_line('trigger called of dead people');
+INSERT INTO DeathOldPEOPLE VALUES (:old.O_id, :old.O_name, :old.O_dob, :old.O_rel_add, :old.O_rel_phn, :old.O_blood_grp, :old.O_joining_date, :new.O_status,:new.O_date_of_dead,:new.O_reason_of_dead,:new.O_burried_place);
+END;
+
+
+
+
+
+.....................................................update oldpeople..............................
+
+
+update oldpeople set O_status='dead',O_date_of_dead=to_date('12-Jan-2017', 'DD-MON-YYYY'),
+O_reason_of_dead='accident',
+O_burried_place='azimpur'
+where O_id='O_1';
+
+
+
+......................................................................drop.................................
+
+drop table OldPEOPLE
+
+drop table DeathOldPEOPLE

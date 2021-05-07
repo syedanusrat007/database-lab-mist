@@ -1,0 +1,13 @@
+delete from oldpeople where o_id='OO1';
+
+update
+
+///
+update  MED set MED_NAME='Napa' where MED_NAME='Aricept';
+
+
+delete  FROM OldPeopleRelative where or_id='OR001';
+
+select *from oldpeople where initcap(O_name)="$_POST['name']" ;
+
+ update employee set M_id='E_3' where emp_id='E_8';

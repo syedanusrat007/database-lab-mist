@@ -1,0 +1,21 @@
+1.ALTER TABLE MOVIE
+add constraints MOVIE_BUDGET_CHECK check(BUDGET>=1000);
+
+
+2. select unique  movie.Title,Actor_name,Director_name,name ,Awarding_date,awards.Title from  actor  
+join STARRING_IN using(actor_id) join movie using(movie_id)  join DIRECTED_BY  using(movie_id) join 
+Director using(director_id) join PRODUCED_BY using(movie_id) join Producer using(producer_id) join
+ WINS_AWARD using(movie_id) join awards using (award_id)where (awards.Title='Oscar') and Awarding_date>to_date('31/12/1990','dd/mm/yyyy')  ;
+
+3.select  movie.Title,Budget,Director_name from  movie  join DIRECTED_BY  using(movie_id) join Director using(director_id)
+where (director_id,budget ) in  (select director_id,max(budget) from movie  join DIRECTED_BY  using(movie_id)
+ join Director using(director_id) where lower(type)='horror' group by director_id having count(director_id)>2);
+
+4.select movie_id,replace(movie_id,substr(movie_id,1,5),'MOVIE')from movie;
+
+5. select title ,(Earned_Money-Budget),type from movie where
+ ((Earned_Money-Budget))>all (select avg(Earned_Money-Budget) from movie
+ group by upper(type));
+
+ 6.select Actor_name ,title,(Earned_Money-Budget),Country from actor natural join STARRING_IN natural join movie where 
+((Earned_Money-Budget))in(select max(earned_money-budget) from movie group by country;
